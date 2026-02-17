@@ -1,0 +1,12 @@
+python-telegram-bot[job-queue]
+rembg
+pillow
+numpy
+onnxruntime
+opencv-python-headless
+qrcode[pil]
+pymupdf
+pillow-heif
+reportlab
+flask
+gunicorn

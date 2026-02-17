@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passport AI - Professional Photo Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: {
+                            900: '#0f172a',
+                            800: '#1e293b',
+                            700: '#334155',
+                        },
+                        brand: {
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-dark-900 text-gray-100 min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="w-full glass fixed top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div
+                    class="w-8 h-8 bg-gradient-to-tr from-brand-500 to-purple-500 rounded-lg shadow-lg shadow-brand-500/20">
+                </div>
+                <h1 class="text-xl font-bold tracking-tight">Passport<span class="text-brand-500">AI</span></h1>
+            </div>
+            <div class="hidden md:flex gap-6 text-sm font-medium text-gray-400">
+                <a href="#" class="hover:text-white transition">Tools</a>
+                <a href="#" class="hover:text-white transition">Pricing</a>
+                <a href="#" class="hover:text-white transition">API</a>
+            </div>
+            <a href="https://github.com/yourusername" target="_blank"
+                class="px-4 py-2 text-sm font-medium bg-white/10 hover:bg-white/20 rounded-full transition border border-white/5">
+                GitHub Repo
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="flex-grow pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center mb-16">
+            <span
+                class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-brand-500 uppercase bg-brand-500/10 rounded-full border border-brand-500/20">
+                v4.2 Ultimate Release
+            </span>
+            <h2 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                Professional Image Tools <br>
+                <span class="bg-gradient-to-r from-brand-500 to-purple-500 bg-clip-text text-transparent">Powered by
+                    AI</span>
+            </h2>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                Create passport photos, remove backgrounds, and convert formats instantly.
+                Free, private, and runs entirely on your local machine.
+            </p>
+        </div>
+
+        <!-- Tool Interface -->
+        <div class="max-w-5xl mx-auto">
+            <form action="/process" method="POST" enctype="multipart/form-data"
+                class="glass rounded-3xl p-1 shadow-2xl overflow-hidden">
+                <div class="bg-dark-800/50 p-8 md:p-10 rounded-[20px]">
+
+                    <!-- Tools Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <!-- Passport -->
+                        <label class="cursor-pointer group">
+                            <input type="radio" name="tool" value="passport" class="peer sr-only" checked>
+                            <div
+                                class="tool-card h-full p-6 rounded-2xl bg-dark-700/30 border border-white/5 peer-checked:bg-brand-600 peer-checked:border-brand-500 peer-checked:shadow-lg transition-all duration-300 relative overflow-hidden">
+                                <div
+                                    class="absolute top-0 right-0 p-2 opacity-10 group-hover:scale-150 transition-transform duration-500">
+                                    <svg class="w-16 h-16" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
+                                    </svg>
+                                </div>
+                                <div class="text-3xl mb-3">🆔</div>
+                                <h3 class="font-semibold text-lg">Passport</h3>
+                                <p class="text-xs text-gray-400 peer-checked:text-white/80 mt-1">Smart Face Crop</p>
+                            </div>
+                        </label>
+
+                        <!-- Remove BG -->
+                        <label class="cursor-pointer group">
+                            <input type="radio" name="tool" value="removebg" class="peer sr-only">
+                            <div
+                                class="tool-card h-full p-6 rounded-2xl bg-dark-700/30 border border-white/5 peer-checked:bg-purple-600 peer-checked:border-purple-500 peer-checked:shadow-lg transition-all duration-300 relative overflow-hidden">
+                                <div class="text-3xl mb-3">✂️</div>
+                                <h3 class="font-semibold text-lg">Remove BG</h3>
+                                <p class="text-xs text-gray-400 peer-checked:text-white/80 mt-1">Instant Transparent</p>
+                            </div>
+                        </label>
+
+                        <!-- Blur -->
+                        <label class="cursor-pointer group">
+                            <input type="radio" name="tool" value="blur" class="peer sr-only">
+                            <div
+                                class="tool-card h-full p-6 rounded-2xl bg-dark-700/30 border border-white/5 peer-checked:bg-teal-600 peer-checked:border-teal-500 peer-checked:shadow-lg transition-all duration-300 relative overflow-hidden">
+                                <div class="text-3xl mb-3">💧</div>
+                                <h3 class="font-semibold text-lg">Portrait Blur</h3>
+                                <p class="text-xs text-gray-400 peer-checked:text-white/80 mt-1">DSLR Bokeh Effect</p>
+                            </div>
+                        </label>
+
+                        <!-- PDF -->
+                        <label class="cursor-pointer group">
+                            <input type="radio" name="tool" value="pdf" class="peer sr-only">
+                            <div
+                                class="tool-card h-full p-6 rounded-2xl bg-dark-700/30 border border-white/5 peer-checked:bg-red-600 peer-checked:border-red-500 peer-checked:shadow-lg transition-all duration-300 relative overflow-hidden">
+                                <div class="text-3xl mb-3">📄</div>
+                                <h3 class="font-semibold text-lg">PDF Maker</h3>
+                                <p class="text-xs text-gray-400 peer-checked:text-white/80 mt-1">Image to Doc</p>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Upload Area -->
+                    <div class="relative group">
+                        <input type="file" name="file" required
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" id="fileInput">
+                        <div
+                            class="w-full h-48 rounded-2xl border-2 border-dashed border-gray-600 bg-dark-800 hover:bg-dark-700 hover:border-brand-500 transition-all duration-300 flex flex-col items-center justify-center gap-4 group-hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.3)]">
+                            <div
+                                class="p-4 bg-dark-700 rounded-full group-hover:scale-110 transition-transform duration-300">
+                                <svg class="w-8 h-8 text-brand-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                    </path>
+                                </svg>
+                            </div>
+                            <div class="text-center">
+                                <p class="text-lg font-medium text-gray-200" id="fileName">Click to Upload or Drag &
+                                    Drop</p>
+                                <p class="text-sm text-gray-500 mt-1">Supports JPG, PNG, WEBP, HEIC (Max 10MB)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="mt-8 flex justify-end">
+                        <button type="submit"
+                            class="group relative px-8 py-4 bg-gradient-to-r from-brand-600 to-purple-600 rounded-xl font-bold text-white shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:-translate-y-0.5 transition-all duration-300 w-full md:w-auto overflow-hidden">
+                            <span class="relative z-10 flex items-center justify-center gap-2">
+                                Start Processing
+                                <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                            </span>
+                            <div
+                                class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                            </div>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-white/5 py-8 mt-12 bg-dark-900/50 backdrop-blur-sm">
+        <div
+            class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+            <p>&copy; 2026 Passport AI Bot. All rights reserved.</p>
+            <div class="flex gap-6 mt-4 md:mt-0">
+                <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple file name update
+        const fileInput = document.getElementById('fileInput');
+        const fileName = document.getElementById('fileName');
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                fileName.textContent = "Selected: " + e.target.files[0].name;
+                fileName.classList.add('text-brand-500');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
