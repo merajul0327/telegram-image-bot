@@ -15,7 +15,12 @@ import image_processor
 
 # ================= CONFIGURATION =================
 # Token provided by user
-BOT_TOKEN = "8530977543:AAGUY_0yNCvpq4Ep4lIJnIkm7Ss0JowrHb0" 
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+if not BOT_TOKEN:
+    print("Error: BOT_TOKEN not found in environment variables.")
+    # For local testing, you might want to uncomment this, but NEVER commit it:
+    # BOT_TOKEN = "8530977543:AAGUY_0yNCvpq4Ep4lIJnIkm7Ss0JowrHb0"
+ 
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
