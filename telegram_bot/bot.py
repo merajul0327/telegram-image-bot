@@ -11,7 +11,9 @@ from PIL import Image
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Import shared logic
-import image_processor
+# Import shared logic
+# import image_processor # Lazy imported to prevent startup blocking
+
 
 # ================= CONFIGURATION =================
 # Token provided by user
@@ -79,11 +81,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     if mode == 'qr':
         await update.message.reply_text("⚙️ Generating QR Code...")
+        import image_processor
         out, fname = await image_processor.process_qr(text)
         await update.message.reply_document(document=out, filename=fname)
         
     elif mode == 'compress_wait_size':
         # User sent size (e.g. "50kb")
+        import image_processor
         target_kb = image_processor.parse_size(text)
         if not target_kb or target_kb <= 0:
             await update.message.reply_text("❌ Invalid format. Please use '50kb' or '1mb'.")
@@ -143,6 +147,7 @@ async def handle_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
             f = await doc.get_file()
             byte_arr = io.BytesIO()
             await f.download_to_memory(out=byte_arr)
+            import image_processor
             out, name = await image_processor.process_pdf_to_image(byte_arr.getvalue())
             await update.message.reply_document(document=out, filename=name)
         else:
@@ -177,6 +182,7 @@ async def process_file(file_id, mode, hd, update, context):
         fname = "result.jpg"
         
         if mode == 'passport':
+            import image_processor
             out_data, fname = await image_processor.process_passport(img, hd)
         elif mode == 'removebg':
             out_data, fname = await image_processor.process_remove_bg(img)
@@ -223,6 +229,7 @@ async def button_click(update: Update, context: ContextTypes.DEFAULT_TYPE):
              
         await query.edit_message_text(f"⏳ Applying {color} background...")
         img = Image.open(io.BytesIO(input_bytes))
+        import image_processor
         out, fname = await image_processor.process_background(img, color)
         await context.bot.send_document(chat_id=update.effective_chat.id, document=out, filename=fname)
 
