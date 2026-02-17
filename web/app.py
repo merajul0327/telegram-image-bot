@@ -6,7 +6,7 @@ from PIL import Image
 
 # Add parent directory to path to find image_processor
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import image_processor
+# import image_processor # Lazy imported inside functions to save memory in Gunicorn
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey"
@@ -21,6 +21,7 @@ def index():
 
 @app.route('/process', methods=['POST'])
 def process():
+    import image_processor # Lazy import to prevent OOM on Render Free Tier
     if 'file' not in request.files:
         flash('No file part')
         return redirect(url_for('index'))

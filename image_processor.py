@@ -4,7 +4,11 @@ import sys
 import re
 import cv2
 import numpy as np
-from rembg import remove
+from rembg import remove, new_session
+
+# Global session for lightweight model
+# u2netp is ~4MB vs u2net ~170MB
+REMBG_SESSION = new_session("u2netp")
 from PIL import Image, ImageOps, ImageEnhance, ImageFilter, ImageDraw
 import qrcode
 import fitz  # PyMuPDF
@@ -83,7 +87,8 @@ def opencv_face_crop(pil_img):
 async def process_passport(img, hd_mode=False):
     """Passport Photo Logic"""
     img = img.convert("RGBA")
-    no_bg = remove(img)
+    # Use specific session
+    no_bg = remove(img, session=REMBG_SESSION)
     white_bg = Image.new("RGBA", no_bg.size, "WHITE")
     white_bg.paste(no_bg, mask=no_bg)
     rgb_img = white_bg.convert("RGB")
@@ -102,7 +107,7 @@ async def process_passport(img, hd_mode=False):
 async def process_remove_bg(img):
     """Transparent PNG"""
     img = img.convert("RGBA")
-    out_img = remove(img)
+    out_img = remove(img, session=REMBG_SESSION)
     out = io.BytesIO()
     out_img.save(out, format='PNG')
     out.seek(0)
@@ -112,7 +117,7 @@ async def process_blur(img):
     """Portrait Mode (Blur Background)"""
     img = img.convert("RGBA")
     # Get mask
-    no_bg = remove(img)
+    no_bg = remove(img, session=REMBG_SESSION)
     mask = no_bg.split()[3] # Alpha channel
     
     # Blur original
