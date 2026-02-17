@@ -1,5 +1,9 @@
 import io
 import os
+# CRITICAL: Disable Numba JIT to prevent OOM on Render Free Tier (512MB)
+os.environ['NUMBA_DISABLE_JIT'] = '1'
+
+import io
 import sys
 import re
 import cv2
